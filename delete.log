@@ -1,1 +1,115 @@
 #2020_04_06 delete.log
+
+******ファイルの中身を確認************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ ls
+logfile.md  read_me.txt  README.md
+
+
+******delete.txtを作成（今回削除）する対象********************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "#delete" >> delete.txt
+
+******ls -aにて隠しファイルを確認（.gitがあれば、gitを使ってる証拠）*********
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ ls -a
+./  ../  .git/  delete.txt  logfile.md  read_me.txt  README.md
+
+******このログを書き込むファイルを作成*************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "#2020_04_06 delete.log" >> delete.log
+
+******ファイルが作成できたかの確認****************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ ls -a
+./  ../  .git/  delete.log  delete.txt  logfile.md  read_me.txt  README.md
+
+******catコマンドで記載されている中身を確認********************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ cat delete.log
+#2020_04_06 delete.log
+
+******git add .でこのディレクトリにあるファイルをstagingに追加される********
+******（レストランでいう料理ができた段階）*********************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add .
+
+******stagingからローカルリポジトリに追加すること**************************
+******（レストランでいうフロアの人が料理を受け取る段階）********************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "3.9 file delete work"
+[master 6bb102d] 3.9 file delete work
+ 2 files changed, 2 insertions(+)
+ create mode 100644 delete.log
+ create mode 100644 delete.txt
+
+******pushコマンドにてリモートリポジトリにアップする***********************
+******ようやくお客さんに料理が届く****************************************
+******ローカルリポジトリ：master*****************************************
+******リモートリポジトリ：origin master**********************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 417 bytes | 417.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/sice11/Work_Samurai.git
+   c356dab..6bb102d  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+******git rmコマンドのオプションを使ったが、いまいち動作がわからんかった*****
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git rm --cached delete.txt
+rm 'delete.txt'
+
+******--cachedオプションをしたから間違えてpushのみを行う*******************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Everything up-to-date
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+******その後stagingに追加などを試みるが、うまくいかない動作*****************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "3.9 delete,txt is rm --cached <file name>"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Everything up-to-date
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+******仕方がないので普通に消す作業のみの動作を確認**************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git rm delete.txt
+rm 'delete.txt'
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add .                                                                                                             
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "3.9 git rm <delete.txt>"                                                                               [master 2316186] 3.9 git rm <delete.txt>
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 delete.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 234 bytes | 234.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/sice11/Work_Samurai.git
+   6bb102d..2316186  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$
