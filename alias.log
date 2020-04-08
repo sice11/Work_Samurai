@@ -1,0 +1,47 @@
+#2020/04/09 log
+
+######エイリアス（別名）設定を行う########################################
+######エイリアスでショートカットを作成しているイメージ######################
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git config --global alias.ci commit                                                                                   
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git config --global alias.st status
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git config --global alias.br branch
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git config --global alias.co chechout
+
+######エイリアスコマンドが実際に有効かどうかのテスト########################
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "#aliasコマンド確認" >> alias.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ cat alias.txt
+#aliasコマンド確認
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add alias.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git ci -m "alias comand check"                                                                                        [master a5bf87c] alias comand check
+ 1 file changed, 1 insertion(+)
+ create mode 100644 alias.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/sice11/Work_Samurai.git
+   80e432f..a5bf87c  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ 
+#####実際に有効であること(リモートリポジトリにアップできた)が確認できた#######
