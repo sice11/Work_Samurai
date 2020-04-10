@@ -1,0 +1,22 @@
+2020_04_11
+
+chechout.log にて記載した内容が、取り消される動作（add前、つまりステージング前）
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ echo "add前のものはcheckoutで取り消せる" >> checkout.log
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ cat checkout.log
+ファイルの変更の取り消しコマンド
+ステージングの段階
+ステージングの段階の取り消し
+add前のものはcheckoutで取り消せる
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git checkout checkout.log
+Updated 1 path from the index
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ cat checkout.log
+ファイルの変更の取り消しコマンド
+ステージングの段階
+ステージングの段階の取り消し
