@@ -19,3 +19,34 @@ $ cat checkout.log
 ステージングの段階の取り消し
 staging後の取り消し
 
+*************************************************************************
+***以下git reset HEAD　のみで実行                                      ***
+***結果うまくいかず                                                    ***
+*************************************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/git_work/Work_Samurai (master)
+$ echo "git resetのやり直し" >> README.md                                                                               
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/git_work/Work_Samurai (master)
+$ cat README.md                                                                                                         # テキストの課題や練習を行うリポジトリ
+Git　README.mdに自動入力
+
+2020/04/09より追記
+5章ファイルの変更を取り消そう
+#commit testgit resetのやり直し
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/git_work/Work_Samurai (master)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/git_work/Work_Samurai (master)
+$ git reset HEAD
+Unstaged changes after reset:
+M       README.md
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/git_work/Work_Samurai (master)
+$ cat README.md
+# テキストの課題や練習を行うリポジトリ
+Git　README.mdに自動入力
+
+2020/04/09より追記
+5章ファイルの変更を取り消そう
+#commit testgit resetのやり直し
+

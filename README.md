@@ -3,4 +3,4 @@ Git　README.mdに自動入力
 
 2020/04/09より追記
 5章ファイルの変更を取り消そう
-#commit test
+#commit testgit resetのやり直し
