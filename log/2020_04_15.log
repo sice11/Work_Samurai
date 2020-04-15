@@ -1,0 +1,91 @@
+2020/04/15 log
+
+************************************************************************
+git commit --amend コマンドで、コミットしたメッセージの取り消し編集を行う。
+************************************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ echo "git commit --amend test2" >> commit_amend.txt
+
+________________________________________________________________________
+ファイルの中身が追加されていることの確認
+________________________________________________________________________
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ cat commit_amend.txt
+git commit --amend  test
+git commit --amend test2
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git add commit_amend.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "update before"
+[master f017d21] update before
+ 1 file changed, 1 insertion(+)
+
+________________________________________________________________________
+commitしたときのメッセージが追加されていることを確認
+________________________________________________________________________
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git log commit_amend.txt
+commit f017d2175d352eaaf90179d4a36241a9b9007631 (HEAD -> master)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:34:54 2020 +0900
+
+    update before       ##←ここ
+
+commit 68038aae34ed80e19251bf77619925aa215607af (origin/master, origin/HEAD)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:29:34 2020 +0900
+
+    update commit message
+
+________________________________________________________________________
+commit を取りやめて、メッセージも編集しなおす
+________________________________________________________________________
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git commit --amend -m "update after"                                                                                  
+[master cd74b7b] update after
+ Date: Wed Apr 15 23:34:54 2020 +0900
+ 1 file changed, 1 insertion(+)
+
+________________________________________________________________________
+編集内容の確認
+________________________________________________________________________
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git log commit_amend.txt
+commit cd74b7b97a376f5b276256cb480b4dda09a55de3 (HEAD -> master)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:34:54 2020 +0900
+
+    update after        ##←ここ
+
+commit 68038aae34ed80e19251bf77619925aa215607af (origin/master, origin/HEAD)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:29:34 2020 +0900
+
+    update commit message
+
+************************************************************************
+以上より、きちんと編集されていることを確認
+以下pushコマンドなりを行う
+************************************************************************
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 295 bytes | 295.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/sice11/Work_Samurai.git
+   68038aa..cd74b7b  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
