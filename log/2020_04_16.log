@@ -1,0 +1,526 @@
+2020/04/16
+
+***********************************************************************
+第6章　リモートリポジトリから情報を取得しよう
+***********************************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~
+$ cd Desktop/Git_Work/Work_Samurai
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git remote                                                                                                            
+origin
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+リモートリポジトリのURLの表示
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git remote -v                                                                                                         
+origin  https://github.com/sice11/Work_Samurai.git (fetch)
+origin  https://github.com/sice11/Work_Samurai.git (push)
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch https://github.com/sice11/Work_Samurai.git                                                                  
+From https://github.com/sice11/Work_Samurai
+ * branch            HEAD       -> FETCH_HEAD
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+リモートから変更を取得
+ただし、work treeに反映するには、mergeコマンドが必要
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fech                                                                                                              
+git: 'fech' is not a git command. See 'git --help'.
+
+The most similar command is
+        fetch
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch origin                                                                                                      
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch origin https://github.com/sice11/Work_Samurai.git
+fatal: invalid refspec 'https://github.com/sice11/Work_Samurai.git'
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch origin master                                                                                               From https://github.com/sice11/Work_Samurai
+ * branch            master     -> FETCH_HEAD
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch https://github.com/sice11/Work_Samurai.git
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 682 bytes | 62.00 KiB/s, done.
+From https://github.com/sice11/Work_Samurai
+ * branch            HEAD       -> FETCH_HEAD
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git merge origin/master                                                                                               Already up to date.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch https://github.com/sice11/Work_Samurai.git                                                                  From https://github.com/sice11/Work_Samurai
+ * branch            HEAD       -> FETCH_HEAD
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+リモートの変更を取得
+こちらは即反映される
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git pull https://github.com/sice11/Work_Samurai Work_Samurai
+fatal: couldn't find remote ref Work_Samurai
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git pull https://github.com/sice11/Work_Samurai master
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (6/6), 1.27 KiB | 65.00 KiB/s, done.
+From https://github.com/sice11/Work_Samurai
+ * branch            master     -> FETCH_HEAD
+Updating 1558594..147471d
+Fast-forward
+ index.txt   | 1 +
+ index2.html | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 index.txt
+ create mode 100644 index2.html
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git fetch https://github.com/sice11/Work_Samurai
+From https://github.com/sice11/Work_Samurai
+ * branch            HEAD       -> FETCH_HEAD
+
+*************************************************************************
+7章branchを使いこなそう
+*************************************************************************
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+どのbranchで作業しているかを確認
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch
+* master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+新しいbranch作成
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch branch1
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch
+  branch1
+* master
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+branchの切り替え
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git checkout branch1
+Switched to branch 'branch1'
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git branch
+* branch1
+  master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "master branch" >> master_branch.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "master_branch.txt 作成"
+[master aaf436a] master_branch.txt 作成
+ 1 file changed, 1 insertion(+)
+ create mode 100644 master_branch.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 316 bytes | 316.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/sice11/Work_Samurai.git
+   147471d..aaf436a  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch
+  branch1
+* master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch branch1
+fatal: A branch named 'branch1' already exists.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git checkout branch1                                                                                                  Switched to branch 'branch1'
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git branch
+* branch1
+  master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ echo "branch1 branch" >> branch1_branch.txt                                                                           
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git commit -m "branch1_branch.txt 作成"
+[branch1 a2d5d5a] branch1_branch.txt 作成
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branch1_branch.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git push -u origin master
+Everything up-to-date
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git push -u origin branch1
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 306 bytes | 306.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'branch1' on GitHub by visiting:
+remote:      https://github.com/sice11/Work_Samurai/pull/new/branch1
+remote:
+To https://github.com/sice11/Work_Samurai.git
+ * [new branch]      branch1 -> branch1
+Branch 'branch1' set up to track remote branch 'branch1' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git branch
+* branch1
+  master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git merge branch1
+Merge made by the 'recursive' strategy.
+ branch1_branch.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branch1_branch.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ ls
+alias.txt           commit_amend.txt  ignore.html  index.txt    kakutyousi.png  logfile.md         read_me.txt
+branch1_branch.txt  hogehoge.txt      index.html   index2.html  log/            master_branch.txt  README.md
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git log
+commit eb8c29e3be5a237e803a42e54445d622e0632bbc (HEAD -> master)
+Merge: aaf436a a2d5d5a
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Thu Apr 16 12:08:28 2020 +0900
+
+    Merge branch 'branch1'
+
+commit a2d5d5a32b1b745c896cb3e6ba3c3a712fe58e3e (origin/branch1, branch1)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+commit eb8c29e3be5a237e803a42e54445d622e0632bbc (HEAD -> master)                                                        Merge: aaf436a a2d5d5a
+Date:   Thu Apr 16 09:54:40 2020 +0900
+
+    branch1_branch.txt 作成
+
+commit aaf436a3d509a91ebbc01b45994a120938a1c048 (origin/master, origin/HEAD)
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Thu Apr 16 09:50:44 2020 +0900
+
+    master_branch.txt 作成
+
+commit 147471d27cbb8e72376b6c1237c9d136773d2b8c
+Author: sice11 <61615289+sice11@users.noreply.github.com>
+Date:   Thu Apr 16 09:32:02 2020 +0900
+
+    Create index2.html
+
+commit 1a068b30f80324374c8f98a06c08a46e5a07728c
+Author: sice11 <61615289+sice11@users.noreply.github.com>
+Date:   Thu Apr 16 09:28:39 2020 +0900
+
+    Create index.txt                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+    Create index.txt
+
+commit 1558594fca5c74356411cd8b5ae8e4ae53120bf3
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:52:59 2020 +0900
+                                                                                                                            2020_04_15.log # add                                                                                                                                                                                                                        commit b10c0d5715bf72c4359b679789c9876b5bf984b9                                                                         Author: sice11 <tensyoku.yonezawa@gmail.com>                                                                            Date:   Wed Apr 15 23:48:50 2020 +0900                                                                                  
+    git commit --amend   practice
+
+commit cd74b7b97a376f5b276256cb480b4dda09a55de3
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:34:54 2020 +0900
+
+    update after
+
+commit 68038aae34ed80e19251bf77619925aa215607af
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 23:29:34 2020 +0900
+
+    update commit message
+
+commit eff3bef411a0815994366d8de388cb3b29b4be6d
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 11:21:28 2020 +0900
+
+    qiita_3
+
+commit e305d824de46d4144c50b1aea9dfbc79c07ea31d
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 10:14:34 2020 +0900
+
+    qiita_1
+
+commit 5dc62795d7ead325a6b9fa313cfb9189140dd3ae
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Wed Apr 15 09:46:39 2020 +0900
+
+    qiita
+
+commit f83e19fd23e78ad8f4c89e2fa7131b178f14d3f9
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Tue Apr 14 09:42:26 2020 +0900
+
+    git resetについての疑問箇所の答えを記載
+
+commit 98156bca5fb9f426b29ef03f5b6ffc4f6f294779
+Author: sice11 <61615289+sice11@users.noreply.github.com>
+Date:   Sat Apr 11 18:53:44 2020 +0900
+
+    Create index.html
+
+commit 74682102671c7a6a5e80dae522295d391e0c52f0
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 17:31:21 2020 +0900
+
+    git reset HEADのみで実行
+
+commit 5a4093be63c48fccef9971ce9692e304780f8491
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 08:02:06 2020 +0900
+
+    all log file move
+
+commit 95d221b4b60c71d6bef7411a0580e62a9f99a387
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 07:56:48 2020 +0900
+
+    log file making
+
+commit 68bf85c140b287b74e838114e5171ab7764048a3
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 01:03:29 2020 +0900
+
+    質問内容記載
+
+commit 51f1aee27e6f92fbb8e575e19e3f36d51bebbc6d
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 00:48:12 2020 +0900
+
+    staging前の取り消し
+
+commit 8b6720c027796590645147181f2ed7af7d7a20a2
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sat Apr 11 00:36:53 2020 +0900
+
+    5.3 変更を元に戻す
+
+commit ba14c35d35fda63d498e5b9297f38a00d0a7d5bd
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Thu Apr 9 23:41:42 2020 +0900
+
+    .gitignore 's test
+
+commit b67709cc1d7172c39d5000bbe057620f45cdbf91
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Thu Apr 9 00:10:49 2020 +0900
+
+    alias.log push
+
+commit a5bf87cfcf365ca8ccd9e1188bfab88f9e2b90a2
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Thu Apr 9 00:02:52 2020 +0900
+
+    alias comand check
+
+commit 80e432fc6d34cb101a0fb95889f94cd55abe46ca
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Tue Apr 7 00:17:21 2020 +0900
+
+    delete.log make by vsc
+
+commit 231618616af1a1faa44b5bdab95ea21f7872ea82
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Mon Apr 6 23:56:40 2020 +0900
+
+    3.9 git rm <delete.txt>
+
+commit 6bb102d9e7483db18179ae9ecc592f5f8e079787
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Mon Apr 6 23:45:17 2020 +0900
+
+    3.9 file delete work
+
+commit c356dab1cae35413501e5e7e5d56a8e586ad0b4a
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sun Apr 5 10:05:20 2020 +0900
+
+    log make
+
+commit a220e6461e4e03e789d2d8b39cdf8f948d2cfe5b
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sun Apr 5 09:26:10 2020 +0900
+
+    work_samurai.log
+
+commit dfa66d2f3d1f5ccd889982d5a090aa9d2da3df33
+Author: sice11 <tensyoku.yonezawa@gmail.com>
+Date:   Sun Mar 29 11:42:06 2020 +0900
+
+    初めてのコミット
+
+commit 431925ec567d8ba821e957da6f2f699ef62e15be
+Author: sice11 <61615289+sice11@users.noreply.github.com>
+Date:   Sun Mar 29 11:30:15 2020 +0900
+
+    Initial commit
+ ESC[C                                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ESC[D                                                                                                                  commit eb8c29e3be5a237e803a42e54445d622e0632bbc (HEAD -> master)                                                        Merge: aaf436a a2d5d5a                                                                                                  Author: sice11 <tensyoku.yonezawa@gmail.com>                                                                            Date:   Thu Apr 16 12:08:28 2020 +0900                                                                                                                                                                                                              Merge branch 'branch1'                                                                                                                                                                                                                      commit a2d5d5a32b1b745c896cb3e6ba3c3a712fe58e3e (origin/branch1, branch1)                                               Author: sice11 <tensyoku.yonezawa@gmail.com>                                                                            Date:   Thu Apr 16 09:54:40 2020 +0900                                                                                                                                                                                                              branch1_branch.txt 作成                                                                                                                                                                                                                     commit aaf436a3d509a91ebbc01b45994a120938a1c048 (origin/master, origin/HEAD)                                            Author: sice11 <tensyoku.yonezawa@gmail.com>                                                                            Date:   Thu Apr 16 09:50:44 2020 +0900                                                                                                                                                                                                              master_branch.txt 作成                                                                                                                                                                                                                      commit 147471d27cbb8e72376b6c1237c9d136773d2b8c                                                                         Author: sice11 <61615289+sice11@users.noreply.github.com>                                                               Date:   Thu Apr 16 09:32:02 2020 +0900                                                                                                                                                                                                              Create index2.html                                                                                                                                                                                                                          commit 1a068b30f80324374c8f98a06c08a46e5a07728c                                                                         Author: sice11 <61615289+sice11@users.noreply.github.com>                                                               Date:   Thu Apr 16 09:28:39 2020 +0900                                                                                                                                                                                                          
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git commit -m "branch1 merge"
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 302 bytes | 302.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/sice11/Work_Samurai.git
+   aaf436a..eb8c29e  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch                                                                                                              branch1
+* master
+                                                                                                                        PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ ls
+alias.txt           commit_amend.txt  ignore.html  index.txt    kakutyousi.png  logfile.md         read_me.txt
+branch1_branch.txt  hogehoge.txt      index.html   index2.html  log/            master_branch.txt  README.md
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "コンフリクト解消" >> index.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ cat index.txt
+インポートコマンドの確認
+コンフリクト解消
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git checkout branch1
+Switched to branch 'branch1'
+M       index.txt
+Your branch is up to date with 'origin/branch1'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ ls
+alias.txt           commit_amend.txt  ignore.html  index.txt    kakutyousi.png  logfile.md   README.md
+branch1_branch.txt  hogehoge.txt      index.html   index2.html  log/            read_me.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ cat index.txt
+インポートコマンドの確認
+コンフリクト解消
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git branch
+* branch1
+  master
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git checkout master
+Switched to branch 'master'
+M       index.txt
+Your branch is up to date with 'origin/master'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ echo "コンフリクト解消テスト" >> index1.html
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ cat index1.html
+コンフリクト解消テスト
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+コンフリクトを解決しよう　が未完
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
