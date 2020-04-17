@@ -1,0 +1,134 @@
+2020/04/17
+**************************************************************************
+7章ブランチを使いこなそう　続き
+コンフリクトを解決しよう
+**************************************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)                                                
+$ git --version                                                                                                         
+git version 2.25.1.windows.1
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+コンフリクトを起こすファイルを作成
+したものの中身を確認(master)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)                                                
+$ cat index.html                                                                                                        
+<h1>Gitチュートリアル</h1>                                                                                              
+<p>ようこそ</p>                                                                                                         
+<p>git addについて</p>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+commitまで行う
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++                                                                                                                                                                                                                          
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)                                                
+$ git add .                                                                                                                                                                                                                                     
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)                                                
+$ git commit -m "masterに追加"                                                                                          
+[master 22666ee] masterに追加                                                                                            
+4 files changed, 3 insertions(+), 4 deletions(-)                                                                        
+delete mode 100644 index.txt                                                                                            
+delete mode 100644 index2.html                                                                                         
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+branch1に切り替え
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)                                                
+$ git checkout branch1                                                                                                  
+Switched to branch 'branch1'                                                                                            
+Your branch is up to date with 'origin/branch1'.                                                                                                                                                                                                
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)                                               
+$ git branch                                                                                                            
+* branch1                                                                                                                 
+master                                                                                                                                                                                                                                        
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)                                               
+$ ls                                                                                                                    
+alias.txt           commit_amend.txt  index.html  index2.html     log/        read_me.txt                               
+branch1_branch.txt  hogehoge.txt      index.txt   kakutyousi.png  logfile.md  README.md                                                                                                                                                         
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.ignoreに.htmlの記載があったため、編集
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)                                               
+$ ls -a                                                                                                                 
+./   .git/       .secret    branch1_branch.txt  hogehoge.txt  index.txt    kakutyousi.png  logfile.md   README.md       
+../  .gitignore  alias.txt  commit_amend.txt    index.html    index2.html  log/            read_me.txt                                                                                                                                          
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)                                               
+$ cat .gitignore                                                                                                        
+.gitignore test                                                                                                         
+.secret                                                                                                                 
+.html                                                                                                                   
+ignore.html                                                                                                             
+*.png                                                                                                                                                                                                                                           
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)                                               
+$ vi .gitignore                                                                                                         
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+コンフリクトを起こすファイルの中身を確認
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ cat index.html
+<h1>Gitチュートリアル<h1>
+<p>ようこそ<p>
+<p>git commitについて<p>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+commmitまで行う
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git commit -m "branch1に追加"
+[branch1 1b7713e] branch1に追加
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+masterに切り替え
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (branch1)
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git branch
+  branch1
+* master
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+コンフリクトが起こったことを確認
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git merge branch1
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+VScodeにてコンフリクトファイルを編集後、pushまで行う
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master|MERGING)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master|MERGING)
+$ git commit -m "コンフリクト解消"
+[master 5c39e60] コンフリクト解消
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git push -u origin master
+Enumerating objects: 16, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (10/10), 1.01 KiB | 1.01 MiB/s, done.
+Total 10 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 2 local objects.
+To https://github.com/sice11/Work_Samurai.git
+   1b3a2dd..5c39e60  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
