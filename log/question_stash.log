@@ -29,3 +29,40 @@ stash@{0}: WIP on master: 1f9d1e0 2020_04_17.log 作成
 
 PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
 $
+
+**************************************************************************
+【解答】
+$ git stash list
+stash@{0}: WIP on master: 1f9d1e0 2020_04_17.log 作成
+こちらは以前commit -m にてメッセージを残したものが記載されている。
+
+以下のように、
+git stash show stash@{ }
+と入力すると、stashされているファイルが確認できる。
+
+では何故以前のlogファイルcommit時のメッセージが出ているかというと、
+git stash
+時のコメントを入力していないためだと思われる。
+
+コメントの残し方は、
+git stash save "message"
+**************************************************************************
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git stash show stash@{1}
+ hogehoge.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$ git stash show -p stash@{1}
+diff --git a/hogehoge.txt b/hogehoge.txt
+index cda283d..e60b674 100644
+--- a/hogehoge.txt
++++ b/hogehoge.txt
+@@ -1,3 +1,4 @@
+ hogehoge
+ hogehoge2
+ hogehoge3
++stashコマンド確認1
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/Desktop/Git_Work/Work_Samurai (master)
+$
