@@ -1,0 +1,31 @@
+question_stash
+
+**************************************************************************
+stashコマンドの動作確認のため、既存ファイルの編集を行い、
+その編集内容を途中保存(stagingまであげた状態)しようとしたが、
+まったく別の昨日作成したファイルが保存されていた。
+**************************************************************************
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ echo "stashコマンド確認1" >> hogehoge.txt
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ cat hogehoge.txt
+hogehoge
+hogehoge2
+hogehoge3
+stashコマンド確認1
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git add .
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git stash
+Saved working directory and index state WIP on master: 1f9d1e0 2020_04_17.log 作成
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$ git stash list
+stash@{0}: WIP on master: 1f9d1e0 2020_04_17.log 作成
+
+PC_User@DESKTOP-2CQ9D5E MINGW64 ~/desktop/Git_Work/Work_Samurai (master)
+$
